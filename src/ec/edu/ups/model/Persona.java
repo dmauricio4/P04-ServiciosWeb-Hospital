@@ -1,126 +1,124 @@
 package ec.edu.ups.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+/**
+ * The persistent class for the "Persona" database table.
+ * 
+ */
 @Entity
-public class Persona implements Serializable{
-	
+@Table(name="\"Persona\"")
+@NamedQuery(name="Persona.findAll", query="SELECT p FROM Persona p")
+public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer IDPersona;
-	private String cedula;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_persona")
+	private Integer idPersona;
+
 	private String apellidos;
-	private String nombres;
-	private String direccion;
-	private String telefono;
+
+	private String cedula;
+
 	private String correo;
-	private String rol;
+
+	private String direccion;
+
+	private String nombres;
+
 	private String password;
-	
+
+	private String rol;
+
+	private String telefono;
+
+
 	public Persona() {
-			
 	}
 
-	public Persona(Integer iDPersona, String cedula, String apellidos, String nombres, String direccion,
-			String telefono, String correo, String rol, String password) {
-		super();
-		IDPersona = iDPersona;
-		this.cedula = cedula;
-		this.apellidos = apellidos;
-		this.nombres = nombres;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.correo = correo;
-		this.rol = rol;
-		this.password = password;
+	public Integer getIdPersona() {
+		return this.idPersona;
 	}
 
-	public Integer getIDPersona() {
-		return IDPersona;
-	}
-
-	public void setIDPersona(Integer iDPersona) {
-		IDPersona = iDPersona;
-	}
-
-	public String getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
+	public void setIdPersona(Integer idPersona) {
+		this.idPersona = idPersona;
 	}
 
 	public String getApellidos() {
-		return apellidos;
+		return this.apellidos;
 	}
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
-	public String getNombres() {
-		return nombres;
+	public String getCedula() {
+		return this.cedula;
 	}
 
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	public String getCorreo() {
-		return correo;
+		return this.correo;
 	}
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
 
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getNombres() {
+		return this.nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getRol() {
-		return rol;
+		return this.rol;
 	}
 
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getTelefono() {
+		return this.telefono;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Persona [IDPersona=" + IDPersona + ", cedula=" + cedula + ", apellidos=" + apellidos + ", nombres="
-				+ nombres + ", direccion=" + direccion + ", telefono=" + telefono + ", correo=" + correo + ", rol="
-				+ rol + ", "+ password +" ]";
+		return "Persona [idPersona=" + idPersona + ", apellidos=" + apellidos + ", cedula=" + cedula + ", correo="
+				+ correo + ", direccion=" + direccion + ", nombres=" + nombres + ", password=" + password + ", rol="
+				+ rol + ", telefono=" + telefono + "]";
 	}
+
+
 	
-
-
 }
