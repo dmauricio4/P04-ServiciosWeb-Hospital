@@ -22,5 +22,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PostgreSQL"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
