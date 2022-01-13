@@ -1,18 +1,15 @@
 package ec.edu.ups.rest;
 
-import java.lang.annotation.Retention;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -41,8 +38,7 @@ public class CitaResource {
 									 @FormParam("estado") String estadoCita,@FormParam("fecha") String fechaCita,@FormParam("sintomas") String sintomatologia,
 									 @FormParam("doctor") Integer doctorEspecialidad,@FormParam("paciente") Integer pacientePersona) throws ParseException {
 		
-		System.out.println("Costo+++++++____" + costo);
-		System.out.println("Costo+++++++____" + doctorEspecialidad);
+		
 		Persona doctor = personaFacade.find(doctorEspecialidad);
 		Persona paciente = personaFacade.find(pacientePersona);
 		
@@ -54,6 +50,21 @@ public class CitaResource {
 		Cita cita = new Cita(comentarioCita, BigDecimal.valueOf(costo), estadoCita, date, sintomatologia, doctor, paciente);
 		citaFacade.create(cita);
 		return Response.status(Response.Status.CREATED).entity(cita).build();
+	}
+	
+	@PUT()
+	@Path("/actualizar")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response actualizarcita(@QueryParam("estadocita")String newestadocita, @QueryParam("id") int id) {
+		 Cita cita = citaFacade.find(id);
+		 cita.setEstadoCita(newestadocita);
+		 if(cita==null) {
+			 return Response.ok("cita no encontrada").build();
+		 }else {
+			 cita.setEstadoCita(newestadocita);;
+			 citaFacade.edit(cita);
+		 }
+		 return Response.ok(cita).build();	
 	}
 	
 
