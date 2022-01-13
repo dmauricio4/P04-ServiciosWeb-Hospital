@@ -23,8 +23,6 @@ public class PacienteResource {
 	@EJB
 	private PersonaFacade personaFacade;
 	
-	@EJB
-	private Cita citaFacade;
 	
 	@GET()
 	@Path("/login")

@@ -1,15 +1,12 @@
 package ec.edu.ups.ejb;
 
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import ec.edu.ups.model.Cita;
 import ec.edu.ups.model.Persona;
 
 @Stateless

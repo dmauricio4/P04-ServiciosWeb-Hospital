@@ -67,5 +67,19 @@ public class CitaResource {
 		 return Response.ok(cita).build();	
 	}
 	
+	@PUT()
+	@Path("/cancelarCitaMedica")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cancelarCitaMedica(@FormParam("id") int id) {
+		 Cita cita = citaFacade.find(id);
+		 System.out.println("No encontrado Id de cita");
+		 if(cita==null) {
+			 return Response.status(Response.Status.NOT_MODIFIED).build();
+		 }else {
+			 cita.setEstadoCita("cancelar");
+			 citaFacade.edit(cita);
+		 }
+		 return Response.ok(cita).build();	
+	}
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="HospitalServices">
-	<jta-data-source>jdbc/__Hospital</jta-data-source>
+	<jta-data-source>jdbc/__hospital</jta-data-source>
 	<class>ec.edu.ups.model.Cita</class>
 	<class>ec.edu.ups.model.Doctor_Especialidad</class>
 	<class>ec.edu.ups.model.Especialidad</class>
@@ -10,7 +10,7 @@
 	<class>ec.edu.ups.model.Historial</class>
 	<class>ec.edu.ups.model.Persona</class>
 		<properties>
-			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+			<property name="eclipselink.ddl-generation" value="none" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
 			<property name="eclipselink.logging.level.sql" value="FINE"/>
  			<property name="eclipselink.logging.parameters" value="true"/>
