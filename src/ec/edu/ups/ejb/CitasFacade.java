@@ -6,12 +6,12 @@ import javax.persistence.PersistenceContext;
 
 import ec.edu.ups.model.Cita;
  @Stateless
-public class CitaFacade extends AbstractFacade<Cita>{
+public class CitasFacade extends AbstractFacade<Cita>{
 	
 	@PersistenceContext(unitName = "HospitalServices")
 	private EntityManager entityManager;
 
-	public CitaFacade(Class<Cita> entityClass) {
+	public CitasFacade(Class<Cita> entityClass) {
 		super(entityClass);
 		// TODO Auto-generated constructor stub
 	}

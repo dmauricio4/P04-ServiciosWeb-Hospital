@@ -11,14 +11,14 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.weld.context.ejb.Ejb;
 
-import ec.edu.ups.ejb.CitaFacade;
+import ec.edu.ups.ejb.CitasFacade;
 import ec.edu.ups.model.Cita;
 
 @Path("/cita")
-public class CitaResource {
+public class CitasResource {
 	
 	@Ejb
-	private CitaFacade citaejb;
+	private CitasFacade citaejb;
 	
 	@PUT()
 	@Path("/actualizar")
