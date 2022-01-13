@@ -1,9 +1,12 @@
 package ec.edu.ups.ejb;
 
+import java.sql.PreparedStatement;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ec.edu.ups.model.Cita;
 import ec.edu.ups.model.Persona;
 
 @Stateless
@@ -39,5 +42,7 @@ public class PersonaFacade extends AbstractFacade<Persona> {
 		}
 		return persona;
 	}
+	
+	
 
 }

@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ec.edu.ups.ejb.PersonaFacade;
+import ec.edu.ups.model.Cita;
 import ec.edu.ups.model.Persona;
 
 
@@ -19,6 +20,9 @@ public class PacienteResource {
 	
 	@EJB
 	private PersonaFacade personaFacade;
+	
+	@EJB
+	private Cita citaFacade;
 	
 	@GET()
 	@Path("/login")
@@ -44,6 +48,8 @@ public class PacienteResource {
 	
 	
 	
+
+
 
 	
 
