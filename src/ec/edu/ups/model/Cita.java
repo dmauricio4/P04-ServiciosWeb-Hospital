@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -39,22 +38,27 @@ public class Cita implements Serializable {
 	//bi-directional many-to-one association to Doctor_Especialidad
 	@ManyToOne
 	@JoinColumn(name="id_medico_especialidad")
-	private Doctor_Especialidad doctorEspecialidad;
+	private Persona doctorEspecialidad;
 
 	//bi-directional many-to-one association to Persona
 	@ManyToOne
 	@JoinColumn(name="id_paciente")
-	private Persona persona;
+	private Persona pacientePersona;
 
-	//bi-directional many-to-one association to Factura_Detalle
-	@OneToMany(mappedBy="cita")
-	private List<Factura_Detalle> facturaDetalles;
-
-	//bi-directional many-to-one association to Historial
-	@OneToMany(mappedBy="cita")
-	private List<Historial> historials;
 
 	public Cita() {
+	}
+
+	public Cita(String comentarioCita, BigDecimal costo, String estadoCita, Date fechaCita, String sintomatologia,
+			Persona doctorEspecialidad, Persona pacientePersona) {
+		super();
+		this.comentarioCita = comentarioCita;
+		this.costo = costo;
+		this.estadoCita = estadoCita;
+		this.fechaCita = fechaCita;
+		this.sintomatologia = sintomatologia;
+		this.doctorEspecialidad = doctorEspecialidad;
+		this.pacientePersona = pacientePersona;
 	}
 
 	public Integer getIdCita() {
@@ -105,64 +109,20 @@ public class Cita implements Serializable {
 		this.sintomatologia = sintomatologia;
 	}
 
-	public Doctor_Especialidad getDoctorEspecialidad() {
+	public Persona getDoctorEspecialidad() {
 		return this.doctorEspecialidad;
 	}
 
-	public void setDoctorEspecialidad(Doctor_Especialidad doctorEspecialidad) {
+	public void setDoctorEspecialidad(Persona doctorEspecialidad) {
 		this.doctorEspecialidad = doctorEspecialidad;
 	}
 
-	public Persona getPersona() {
-		return this.persona;
+	@Override
+	public String toString() {
+		return "Cita [idCita=" + idCita + ", comentarioCita=" + comentarioCita + ", costo=" + costo + ", estadoCita="
+				+ estadoCita + ", fechaCita=" + fechaCita + ", sintomatologia=" + sintomatologia
+				+ ", doctorEspecialidad=" + doctorEspecialidad + ", pacientePersona=" + pacientePersona + "]";
 	}
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
-	public List<Factura_Detalle> getFacturaDetalles() {
-		return this.facturaDetalles;
-	}
-
-	public void setFacturaDetalles(List<Factura_Detalle> facturaDetalles) {
-		this.facturaDetalles = facturaDetalles;
-	}
-
-	public Factura_Detalle addFacturaDetalle(Factura_Detalle facturaDetalle) {
-		getFacturaDetalles().add(facturaDetalle);
-		facturaDetalle.setCita(this);
-
-		return facturaDetalle;
-	}
-
-	public Factura_Detalle removeFacturaDetalle(Factura_Detalle facturaDetalle) {
-		getFacturaDetalles().remove(facturaDetalle);
-		facturaDetalle.setCita(null);
-
-		return facturaDetalle;
-	}
-
-	public List<Historial> getHistorials() {
-		return this.historials;
-	}
-
-	public void setHistorials(List<Historial> historials) {
-		this.historials = historials;
-	}
-
-	public Historial addHistorial(Historial historial) {
-		getHistorials().add(historial);
-		historial.setCita(this);
-
-		return historial;
-	}
-
-	public Historial removeHistorial(Historial historial) {
-		getHistorials().remove(historial);
-		historial.setCita(null);
-
-		return historial;
-	}
-
+	
 }

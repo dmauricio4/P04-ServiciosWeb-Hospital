@@ -1,6 +1,9 @@
 package ec.edu.ups.ejb;
 
+
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,13 +39,30 @@ public class PersonaFacade extends AbstractFacade<Persona> {
 											 .setParameter("password", password)
 											 .getSingleResult();
 			
-			System.out.println("PersonaFACADE -->" + persona.toString());
 		} catch (Exception e) {
 			System.out.println("--> ERROR Persona.getPersona" + e.getMessage());
 		}
 		return persona;
 	}
 	
+
+	public List<Persona> getPersonabyEspecialidad(String especialidad) {
+		String query = "SELECT * \n"
+				+ "From public.\"Persona\" pe, public.\"Doctor_Especialidad\" doce, public.\"Especialidad\" e\n"
+				+ "WHERE doce.id_doctor = pe.id_persona and doce.id_especialidad = e.id_especialidad\n"
+				+ "and e.nombre_especialidad='"+ especialidad +"'";
+		List<Persona> personas = new ArrayList<Persona>();
 	
+		try {
+			personas = entityManager.createNativeQuery(query).getResultList();
+			System.out.println("Personas------->:" + personas);
+			
+		} catch (Exception e) {
+			System.out.println("--> ERROR Persona.getPersonabyEspecialidad" + e.getMessage());
+		}
+				
+		return personas;
+	}
+		
 
 }
