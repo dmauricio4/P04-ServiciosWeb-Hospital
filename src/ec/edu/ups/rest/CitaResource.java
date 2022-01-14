@@ -109,7 +109,7 @@ public class CitaResource {
 			if (citas == null) {
 				return Response.status(Response.Status.NOT_FOUND).entity(404).build();
 			}else {
-				return Response.ok(jsonb.toJson(citaFacade.getCitasbyEstado(estado))).build();
+				return Response.ok(jsonb.toJson(citas)).build();
 			}
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(500).build();
@@ -132,7 +132,40 @@ public class CitaResource {
 			if (citas == null) {
 				return Response.status(Response.Status.NOT_FOUND).entity(404).build();
 			}else {
-				return Response.ok(jsonb.toJson(citaFacade.getCitasbyDate(date))).build();
+				return Response.ok(jsonb.toJson(citas)).build();
+			}
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(500).build();
+		}
+		
+	}
+	
+	@GET
+	@Path("/listarMedico")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCitasMedico(@QueryParam("nombre") String nombreCompleto) {
+		
+		try {
+			Jsonb jsonb = JsonbBuilder.create();
+			
+			String[] wordString = nombreCompleto.split(" ");
+			
+			String nombre = null;
+			String apellido = null;
+			
+			
+			for (int i = 0; i < wordString.length; i++) {
+				nombre = wordString[0];
+				apellido = wordString[i];
+			}
+			
+			
+			List<Cita> citas = citaFacade.getCitasbyMedico(nombre, apellido);
+			
+			if (citas == null) {
+				return Response.status(Response.Status.NOT_FOUND).entity(404).build();
+			}else {
+				return Response.ok(jsonb.toJson(citas)).build();
 			}
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(500).build();

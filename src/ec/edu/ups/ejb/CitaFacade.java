@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import ec.edu.ups.model.Cita;
-import ec.edu.ups.model.Persona;
 
 @Stateless
 public class CitaFacade extends AbstractFacade<Cita> {
@@ -31,9 +30,9 @@ public class CitaFacade extends AbstractFacade<Cita> {
 		List<Cita> citas = new ArrayList<Cita>();
 		
 		try {
-			citas = (List<Cita>) entityManager.createQuery(query)
-											 .setParameter("estado", estado)
-											 .getResultList();
+			citas = entityManager.createQuery(query, Cita.class)
+								 .setParameter("estado", estado)
+								 .getResultList();
 			
 			
 		} catch (Exception e) {
@@ -47,19 +46,34 @@ public class CitaFacade extends AbstractFacade<Cita> {
 		List<Cita> citas = new ArrayList<Cita>();
 		
 		try {
-			citas = (List<Cita>) entityManager.createQuery(query)
-											 .setParameter("fecha", fecha)
-											 .getResultList();
-			
-			System.out.println("CItas: " + citas);
+			citas =  entityManager.createQuery(query, Cita.class)
+								  .setParameter("fecha", fecha)
+								  .getResultList();
 			
 			
 		} catch (Exception e) {
-			System.out.println("--> ERROR Cita.getCitasbyEstado" + e.getMessage());
+			System.out.println("--> ERROR Cita.getCitasbyDate" + e.getMessage());
 		}
 		return citas;
 	}
 	
+	public List<Cita> getCitasbyMedico(String nombre, String apellido) {
+		String query = "SELECT p, c FROM Cita c JOIN c.doctorEspecialidad p WHERE p.nombres = :nombre AND p.apellidos = :apellido";
+		List<Cita> citas = new ArrayList<Cita>();
+		
+		try {
+			
+			citas = entityManager.createQuery(query, Cita.class)
+								 .setParameter("nombre", nombre)
+								 .setParameter("apellido", apellido)
+								 .getResultList();
+			
+		} catch (Exception e) {
+			System.out.println("--> ERROR Cita.getCitasbyMedico" + e.getMessage());
+		}
+		
+		return citas;
+	}
 	
 	
 	

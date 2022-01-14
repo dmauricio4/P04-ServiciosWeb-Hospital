@@ -7,6 +7,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+
 import ec.edu.ups.model.Persona;
 
 @Stateless
@@ -44,15 +46,17 @@ public class PersonaFacade extends AbstractFacade<Persona> {
 	
 
 	public List<Persona> getPersonabyEspecialidad(String especialidad) {
-		String query = "SELECT * \n"
-				+ "From public.\"Persona\" pe, public.\"Doctor_Especialidad\" doce, public.\"Especialidad\" e\n"
-				+ "WHERE doce.id_doctor = pe.id_persona and doce.id_especialidad = e.id_especialidad\n"
-				+ "and e.nombre_especialidad='"+ especialidad +"'";
+		
+		String query = "SELECT p, doce, e FROM Doctor_Especialidad doce "
+						+ "JOIN doce.doctorPersona p JOIN doce.especialidad e "
+						+ "WHERE e.nombreEspecialidad = :especialidad";
+		
 		List<Persona> personas = new ArrayList<Persona>();
 	
 		try {
-			personas = entityManager.createNativeQuery(query).getResultList();
-			System.out.println("Personas------->:" + personas);
+			personas =  entityManager.createQuery(query, Persona.class)
+									 .setParameter("especialidad", especialidad)
+									 .getResultList();
 			
 		} catch (Exception e) {
 			System.out.println("--> ERROR Persona.getPersonabyEspecialidad" + e.getMessage());
