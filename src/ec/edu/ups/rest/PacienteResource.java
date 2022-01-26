@@ -4,7 +4,10 @@ package ec.edu.ups.rest;
 import javax.ejb.EJB;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -12,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ec.edu.ups.ejb.PersonaFacade;
-import ec.edu.ups.model.Cita;
 import ec.edu.ups.model.Persona;
 
 
@@ -60,6 +62,22 @@ public class PacienteResource {
 		return Response.ok(jsonb.toJson(personaFacade.find(id))).build();
 	}
 	
+	@POST
+	@Path("/crearPaciente")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createPaciente(@FormParam("nombres") String name, @FormParam("apellidos") String lastName, @FormParam("correo") String correo,
+								   @FormParam("cedula") String dni, @FormParam("direccion") String direccion, @FormParam("password") String password,
+								   @FormParam("telefono") String telefono) {
+		try {
+			Persona persona = new Persona(lastName, dni, correo, direccion, name, password, "Paciente", telefono);
+			personaFacade.create(persona);
+			return Response.status(Response.Status.CREATED).entity(persona).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(500).build();
+		}
+		
+	}
 	
 	
 	
